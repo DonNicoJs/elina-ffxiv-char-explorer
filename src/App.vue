@@ -6,11 +6,14 @@
         <span class="font-weight-light">Char Explorer</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn flat :to="{name: 'home'}">
+      <v-btn flat exact :to="{name: 'home'}">
         <span class="mr-2">Home</span>
       </v-btn>
       <v-btn flat :to="{name: 'about'}">
         <span class="mr-2">About</span>
+      </v-btn>
+      <v-btn flat :to="{name: 'credit'}">
+        <span class="mr-2">Credit</span>
       </v-btn>
     </v-toolbar>
 
