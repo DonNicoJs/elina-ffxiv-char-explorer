@@ -9,12 +9,16 @@ export default new Vuex.Store({
     servers: [],
     // this does not need to an array, we want to store a single selection:
     // selectedServer: []
-    selectedServer: null
+    selectedServer: null,
+    characterName: null,
+    characters: []
   },
 
   getters: {
     getServersList: state => state.servers,
-    getChoosedServer: state => state.selectedServer
+    getChoosedServer: state => state.selectedServer,
+    getCharacterName: state => state.characterName,
+    getCharacters: state => state.characters
   },
 
   mutations: {
@@ -26,6 +30,13 @@ export default new Vuex.Store({
       // since this is a single selection we can just assign it
       // state.selectedServer.splice(0, server);
       state.selectedServer = server;
+    },
+
+    SET_NAME: (state, name) => {
+      state.characterName = name;
+    },
+    SET_CHARACTERS: (state, list) => {
+      state.characters = list;
     }
   },
 
@@ -37,6 +48,20 @@ export default new Vuex.Store({
 
     changeServer(context, server) {
       context.commit("SET_CHOOSE_SERVER", server);
+    },
+
+    changeCharacterName(context, name) {
+      context.commit("SET_NAME", name);
+    },
+    async searchCharacter({ commit, state }) {
+      const params = {
+        server: state.selectedServer,
+        name: state.characterName
+      };
+      const { data } = await axios.get("https://xivapi.com/character/search", {
+        params
+      });
+      commit("SET_CHARACTERS", data.Results);
     }
   }
 });
