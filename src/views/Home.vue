@@ -9,7 +9,20 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+// EXERCISE 1: create a selection menu that allow the user to select a server: 
+// https://vuetifyjs.com/en/components/selects
+// use the store and build on top of what I've made for you
 export default {
-  components: {}
+  components: {},
+  created () {
+    this.fetchServers();
+  },
+  methods: {
+    ...mapActions({
+      fetchServers: 'fetchServers'
+    })
+  }
+
 };
 </script>
