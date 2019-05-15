@@ -8,11 +8,17 @@ export default new Vuex.Store({
   state: {
     servers: []
   },
+
+  getters: {
+    getServersList: state => state.servers
+  },
+
   mutations: {
     SET_SERVERS: (state, list) => {
       state.servers = list;
     }
   },
+
   actions: {
     async fetchServers({ commit }) {
       const { data } = await axios.get("https://xivapi.com/servers");
